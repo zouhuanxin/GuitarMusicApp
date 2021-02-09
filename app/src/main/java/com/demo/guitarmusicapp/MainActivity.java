@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             4 * 1024, 16 * 1024, 32 * 1024};
     private RecordPlayThread recordPlayThread;
     private double Eright = 329.6276, B = 246.9417, G = 195.9977, D = 146.8324, A = 110.0000, Eleft = 82.4069;
+    //精确度
+    private int precision = 1;
 
     private InstrumentChar resultChar;
     private TextView result;
@@ -82,27 +84,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] arr = String.valueOf(frequency).split("\\.");
-                        if (arr.length != 2) {
-                            return;
-                        }
-                        if (arr[1].length() < 4) {
-                            return;
-                        }
-                        double value = Double.parseDouble(arr[0] +"."+ arr[1].substring(0, 4));
+                        double value = new BigDecimal(frequency).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
                         result.setText(value + "hz");
                         resultChar.updateView(value);
-                        if (value == Eright) {
+                        if (checkFrequency(value, new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t6.setBackgroundColor(Color.parseColor("#60ffffff"));
-                        } else if (value == B) {
+                        } else if (checkFrequency(value, new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t4.setBackgroundColor(Color.parseColor("#60ffffff"));
-                        } else if (value == G) {
+                        } else if (checkFrequency(value, new BigDecimal(G).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t2.setBackgroundColor(Color.parseColor("#60ffffff"));
-                        } else if (value == D) {
+                        } else if (checkFrequency(value, new BigDecimal(D).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t1.setBackgroundColor(Color.parseColor("#60ffffff"));
-                        } else if (value == A) {
+                        } else if (checkFrequency(value, new BigDecimal(A).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t3.setBackgroundColor(Color.parseColor("#60ffffff"));
-                        } else if (value == Eleft) {
+                        } else if (checkFrequency(value, new BigDecimal(Eleft).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t5.setBackgroundColor(Color.parseColor("#60ffffff"));
                         }
                     }
@@ -116,12 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 取消所有按钮状态
      */
     private void clearViewBack() {
-//        t1.setBackgroundColor(Color.parseColor("#00ffffff"));
-//        t2.setBackgroundColor(Color.parseColor("#00ffffff"));
-//        t3.setBackgroundColor(Color.parseColor("#00ffffff"));
-//        t4.setBackgroundColor(Color.parseColor("#00ffffff"));
-//        t5.setBackgroundColor(Color.parseColor("#00ffffff"));
-//        t6.setBackgroundColor(Color.parseColor("#00ffffff"));
         t1.setBackgroundResource(R.drawable.button_style1);
         t2.setBackgroundResource(R.drawable.button_style1);
         t3.setBackgroundResource(R.drawable.button_style1);
@@ -158,37 +147,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        String value;
         switch (v.getId()) {
             case R.id.t1:
-                Toast.makeText(MainActivity.this, D+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(D+"HZ");
-                resultChar.insertValues(D);
+                value = String.valueOf(new BigDecimal(D).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t2:
-                Toast.makeText(MainActivity.this, G+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(G+"HZ");
-                resultChar.insertValues(G);
+                value = String.valueOf(new BigDecimal(G).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t3:
-                Toast.makeText(MainActivity.this, A+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(A+"HZ");
-                resultChar.insertValues(A);
+                value = String.valueOf(new BigDecimal(A).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, A + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t4:
-                Toast.makeText(MainActivity.this, B+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(B+"HZ");
-                resultChar.insertValues(B);
+                value = String.valueOf(new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t5:
-                Toast.makeText(MainActivity.this, Eleft+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(Eleft+"HZ");
-                resultChar.insertValues(Eleft);
+                value = String.valueOf(new BigDecimal(Eleft).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t6:
-                Toast.makeText(MainActivity.this, Eright+"HZ", Toast.LENGTH_SHORT).show();
-                frequent.setText(Eright+"HZ");
-                resultChar.insertValues(Eright);
+                value = String.valueOf(new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
+                Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
+                frequent.setText(value + "HZ");
+                resultChar.insertValues(Double.parseDouble(value));
                 break;
         }
+    }
+
+    /**
+     * 判断频率是否准备 上下不超过3
+     */
+    private boolean checkFrequency(double v1, double v2) {
+        double va = Math.abs(v1 - v2);
+        if (va < 0.3) {
+            return true;
+        }
+        return false;
     }
 }

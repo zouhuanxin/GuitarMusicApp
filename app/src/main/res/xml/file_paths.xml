@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--external-path 就是用来指定Uri 共享的，
+        name 属性的值可以随便填，  path 属性的 值表示共享的具体路径。
+        这里设置 . 就表示将整个SD卡进行共享 -->
+    <external-path
+        name="my_images"
+        path="." />
+</paths>

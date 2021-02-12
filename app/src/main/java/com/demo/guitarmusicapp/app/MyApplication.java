@@ -3,6 +3,8 @@ package com.demo.guitarmusicapp.app;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.multidex.MultiDex;
+
 import com.demo.guitarmusicapp.R;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -25,12 +27,14 @@ public class MyApplication extends Application {
         Bugly.init(getApplicationContext(), "0c8e1a4565", false);
     }
 
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(base);
-//        // you must install multiDex whatever tinker is installed!
-//        MultiDex.install(base);
-//    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+
+        Beta.installTinker();
+    }
 
     public static MyApplication getMyApplication() {
         return myApplication;

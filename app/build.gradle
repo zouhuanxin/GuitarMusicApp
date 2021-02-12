@@ -1,6 +1,8 @@
-plugins {
-    id 'com.android.application'
-}
+//plugins {
+//    id 'com.android.application'
+//}
+apply plugin: 'com.android.application'
+apply plugin: 'com.tencent.tinker.patch'
 
 android {
     compileSdkVersion 30
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.demo.guitarmusicapp"
-        minSdkVersion 21
+        minSdkVersion 20
         targetSdkVersion 30
         versionCode 1
         versionName "1"
@@ -20,6 +22,19 @@ android {
             abiFilters 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
+    //签名配置
+    signingConfigs {
+        release {
+            try {
+                storeFile file("./key.jks")
+                storePassword "123123"
+                keyAlias "key0"
+                keyPassword "123123"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+    }
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
@@ -29,12 +44,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             debuggable true
             minifyEnabled false
-            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -57,6 +73,9 @@ dependencies {
     //implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
-  //  implementation "com.android.support:multidex:1.0.2"
-
+    implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.7'
+    implementation "com.android.support:multidex:1.0.2"
 }
+
+// 依赖插件脚本
+apply from: 'tinker-support.gradle'

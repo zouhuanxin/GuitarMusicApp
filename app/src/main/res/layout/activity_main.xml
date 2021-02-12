@@ -20,7 +20,6 @@
             android:layout_height="wrap_content">
         </TextView>
         <ImageView
-            android:visibility="gone"
             android:id="@+id/reset"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_gravity="right|center"

@@ -1,4 +1,4 @@
-package com.demo.guitarmusicapp;
+package com.demo.guitarmusicapp.activity;
 
 import android.media.AudioRecord;
 import android.media.AudioTrack;

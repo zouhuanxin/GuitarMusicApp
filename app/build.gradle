@@ -2,6 +2,8 @@
 //    id 'com.android.application'
 //}
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.tencent.tinker.patch'
 
 android {
@@ -53,10 +55,15 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -65,6 +72,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -75,7 +83,12 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.7'
     implementation "com.android.support:multidex:1.0.2"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
 }
 
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
+apply plugin: 'kotlin-android'

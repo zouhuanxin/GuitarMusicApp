@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:background="@color/setting_toolbar_theme_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <ImageView
+            android:paddingLeft="@dimen/dp_10"
+            android:layout_gravity="center|left"
+            android:src="@mipmap/arrow_left"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_30">
+        </ImageView>
+
+        <TextView
+            android:text="设置"
+            android:textSize="@dimen/sp_18"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:text="主题设置"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_15"
+                android:padding="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/themecontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

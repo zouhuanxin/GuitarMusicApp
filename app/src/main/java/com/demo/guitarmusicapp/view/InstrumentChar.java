@@ -49,9 +49,9 @@ public class InstrumentChar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
-        paint.setColor(Color.parseColor("#202020"));
-        RectF rectF = new RectF(0, 0, getWidth(), getHeight());
-        canvas.drawRect(rectF, paint);
+//        paint.setColor(Color.parseColor("#202020"));
+//        RectF rectF = new RectF(0, 0, getWidth(), getHeight());
+//        canvas.drawRect(rectF, paint);
         paint.setColor(Color.parseColor("#2b2b2b"));
         paint.setStrokeWidth(10);
         int intervalW = getWidth() / 20;

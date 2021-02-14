@@ -1,5 +1,6 @@
-package com.demo.guitarmusicapp;
+package com.demo.guitarmusicapp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -7,11 +8,16 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.demo.guitarmusicapp.R;
 import com.demo.guitarmusicapp.util.NavigationManager;
 import com.demo.guitarmusicapp.util.PermissionUtils;
 import com.demo.guitarmusicapp.view.InstrumentChar;
@@ -43,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView reset;
     private TextView frequent;
 
+    private MainViewModel mainViewModel;
+    public static MainActivity mainActivity = null;
+    private LinearLayout mainGroup;
+
     // 每个device的初始化参数可能不同
     private void initAudioRecord() {
         int counter = 0;
@@ -61,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
+        mainViewModel = new ViewModelProvider(mainActivity).get(MainViewModel.class);
         NavigationManager.setBottomNavigationColor(this);
         new PermissionUtils().verifyStoragePermissions(this, null);
         initRecord();
@@ -120,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        mainGroup = (LinearLayout) findViewById(R.id.main_group);
         resultChar = (InstrumentChar) findViewById(R.id.result_char);
         result = (TextView) findViewById(R.id.result);
         t1 = (RoundedTextView) findViewById(R.id.t1);
@@ -134,15 +147,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearViewBack();
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                //clearViewBack();
             }
         });
+
+        mainViewModel.getBackColor().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mainGroup.setBackgroundColor(Color.parseColor(s));
+            }
+        });
+        mainViewModel.getFrequencybackcolor().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                resultChar.setBackgroundColor(Color.parseColor(s));
+            }
+        });
+
         t1.setOnClickListener(this);
         t2.setOnClickListener(this);
         t3.setOnClickListener(this);
         t4.setOnClickListener(this);
         t5.setOnClickListener(this);
         t6.setOnClickListener(this);
+
     }
 
     @Override

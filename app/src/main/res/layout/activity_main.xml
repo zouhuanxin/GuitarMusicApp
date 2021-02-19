@@ -14,8 +14,8 @@
         <TextView
             android:layout_gravity="left|center"
             android:layout_margin="@dimen/dp_20"
-            android:textSize="@dimen/dp_30"
-            android:text="吉他调音器"
+            android:textSize="@dimen/dp_25"
+            android:text="笨笨的吉他调音器"
             android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

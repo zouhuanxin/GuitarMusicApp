@@ -28,7 +28,7 @@ double get_pitch_from_short(short *data, int sample_rate);
 
 
 extern "C" {
-    JNIEXPORT jdouble JNICALL Java_com_demo_guitarmusicapp_RecordPlayThread_get_1pitch_1from_1short
+    JNIEXPORT jdouble JNICALL Java_com_demo_guitarmusicapp_activity_RecordPlayThread_get_1pitch_1from_1short
             (JNIEnv *env, jobject cls, jshortArray arr, jint sampleRate) {
         int numSamples = env->GetArrayLength(arr);
         short *c_arr = new short[numSamples];

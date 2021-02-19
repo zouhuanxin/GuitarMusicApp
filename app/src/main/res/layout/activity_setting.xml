@@ -12,6 +12,7 @@
         android:layout_height="@dimen/dp_50">
 
         <ImageView
+            android:id="@+id/back"
             android:paddingLeft="@dimen/dp_10"
             android:layout_gravity="center|left"
             android:src="@mipmap/arrow_left"

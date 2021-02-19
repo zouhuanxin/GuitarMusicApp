@@ -7,6 +7,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.demo.guitarmusicapp.R;
 import com.demo.guitarmusicapp.util.NavigationManager;
@@ -24,6 +24,8 @@ import com.demo.guitarmusicapp.view.InstrumentChar;
 import com.zhx.myrounded.RoundedTextView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,10 +38,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecordPlayThread recordPlayThread;
     private double Eright = 329.6276, B = 246.9417, G = 195.9977, D = 146.8324, A = 110.0000, Eleft = 82.4069;
     //精确度
+    //G:195 B:246 Eright:329 D:146 A:110 Elfet:82
     private int precision = 1;
 
-    private InstrumentChar resultChar;
-    private TextView result;
+    private FrameLayout back1;
+    private RoundedTextView result;
+    private RoundedTextView frequent;
     private RoundedTextView t1;
     private RoundedTextView t2;
     private RoundedTextView t3;
@@ -47,11 +51,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RoundedTextView t5;
     private RoundedTextView t6;
     private ImageView reset;
-    private TextView frequent;
+    private TextView goAccurateModel;
+    private FrameLayout mainGroup2;
+    private InstrumentChar resultChar;
+    private TextView result2;
+    private TextView closeAccurateModel;
 
     private MainViewModel mainViewModel;
     public static MainActivity mainActivity = null;
     private LinearLayout mainGroup;
+
+    private List<Float> xAxisValues = new ArrayList<>();
+    private List<Float> yAxisValues = new ArrayList<>();
 
     // 每个device的初始化参数可能不同
     private void initAudioRecord() {
@@ -87,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AudioFormat.ENCODING_PCM_16BIT, frequency * 6);
     }
 
-
     private void startMusic() {
         recordPlayThread = new RecordPlayThread(audioRecord, true, frequency, buffsize);
         recordPlayThread.setDataCallBack(new RecordPlayThread.DataCallBack() {
@@ -96,9 +106,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        result2.setText(new BigDecimal(frequency).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue() + "HZ");
+                        resultChar.updateView(new BigDecimal(frequency).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue());
                         double value = new BigDecimal(frequency).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
-                        result.setText(value + "hz");
-                        resultChar.updateView(value);
+                        result.setText(value + "HZ");
                         if (checkFrequency(value, new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t6.setBackgroundColor(Color.parseColor("#60ffffff"));
                         } else if (checkFrequency(value, new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
@@ -133,8 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         mainGroup = (LinearLayout) findViewById(R.id.main_group);
-        resultChar = (InstrumentChar) findViewById(R.id.result_char);
-        result = (TextView) findViewById(R.id.result);
+        back1 = (FrameLayout) findViewById(R.id.back1);
         t1 = (RoundedTextView) findViewById(R.id.t1);
         t2 = (RoundedTextView) findViewById(R.id.t2);
         t3 = (RoundedTextView) findViewById(R.id.t3);
@@ -142,7 +152,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         t5 = (RoundedTextView) findViewById(R.id.t5);
         t6 = (RoundedTextView) findViewById(R.id.t6);
         reset = (ImageView) findViewById(R.id.reset);
-        frequent = (TextView) findViewById(R.id.frequent);
+        result = (RoundedTextView) findViewById(R.id.result);
+        frequent = (RoundedTextView) findViewById(R.id.frequent);
+        goAccurateModel = (TextView) findViewById(R.id.go_accurate_model);
+        //精确模式
+        mainGroup2 = (FrameLayout) findViewById(R.id.main_group2);
+        resultChar = (InstrumentChar) findViewById(R.id.result_char);
+        result2 = (TextView) findViewById(R.id.result2);
+        closeAccurateModel = (TextView) findViewById(R.id.close_accurate_model);
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,15 +169,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        goAccurateModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入精准模式
+                mainGroup2.setVisibility(View.VISIBLE);
+            }
+        });
+        closeAccurateModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入精准模式
+                mainGroup2.setVisibility(View.GONE);
+            }
+        });
+
         mainViewModel.getBackColor().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 mainGroup.setBackgroundColor(Color.parseColor(s));
+                mainGroup2.setBackgroundColor(Color.parseColor(s));
             }
         });
         mainViewModel.getFrequencybackcolor().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                back1.setBackgroundColor(Color.parseColor(s));
+                result.setBackgroundColor(Color.parseColor(s));
+                frequent.setBackgroundColor(Color.parseColor(s));
                 resultChar.setBackgroundColor(Color.parseColor(s));
             }
         });
@@ -171,7 +207,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         t4.setOnClickListener(this);
         t5.setOnClickListener(this);
         t6.setOnClickListener(this);
-
     }
 
     @Override
@@ -182,37 +217,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 value = String.valueOf(new BigDecimal(D).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t2:
                 value = String.valueOf(new BigDecimal(G).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t3:
                 value = String.valueOf(new BigDecimal(A).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, A + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t4:
                 value = String.valueOf(new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t5:
                 value = String.valueOf(new BigDecimal(Eleft).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t6:
                 value = String.valueOf(new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
-                resultChar.insertValues(Double.parseDouble(value));
                 break;
         }
     }

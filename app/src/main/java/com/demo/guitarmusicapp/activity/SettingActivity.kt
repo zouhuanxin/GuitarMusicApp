@@ -29,6 +29,9 @@ class SettingActivity : AppCompatActivity() {
     }
 
     fun initView() {
+        back.setOnClickListener({
+            finish()
+        })
         settingViewModel!!.themedata.observe(this, Observer {
             val adapter = BaseRecyclerAdapter<Theme>(R.layout.setting_item) {
                 onBindViewHolder { holder, position ->

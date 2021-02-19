@@ -1,203 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2c2c2c"
-    android:id="@+id/main_group"
-    android:orientation="vertical">
+    android:animateLayoutChanges="true">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/main_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_gravity="left|center"
-            android:layout_margin="@dimen/dp_20"
-            android:textSize="@dimen/dp_25"
-            android:text="笨笨的吉他调音器"
-            android:textColor="#ffffff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-        <ImageView
-            android:id="@+id/reset"
-            android:layout_marginRight="@dimen/dp_20"
-            android:layout_gravity="right|center"
-            android:src="@mipmap/setting"
-            android:layout_width="@dimen/dp_27"
-            android:layout_height="@dimen/dp_27">
-        </ImageView>
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.demo.guitarmusicapp.view.InstrumentChar
-            android:id="@+id/result_char"
-            android:background="#202020"
-            android:layout_marginTop="@dimen/dp_50"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#2c2c2c">
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150">
-        </com.demo.guitarmusicapp.view.InstrumentChar>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/reset"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_gravity="right|center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:src="@mipmap/setting"></ImageView>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/back1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200">
+
+            <com.zhx.myrounded.RoundedTextView
+                android:id="@+id/result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dp_80"
+                android:text="0hz"
+                android:textColor="#ffffff"
+                app:rRadius="1000dp"
+                android:padding="@dimen/dp_30"
+                app:rStrokeColor="#ffffff"
+                app:rStrokeWidth="@dimen/dp_1"
+                android:textSize="@dimen/dp_20">
+            </com.zhx.myrounded.RoundedTextView>
+
+            <com.zhx.myrounded.RoundedTextView
+                android:id="@+id/frequent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0hz"
+                android:layout_marginLeft="@dimen/dp_80"
+                android:textColor="#ff0000"
+                app:rRadius="1000dp"
+                android:padding="@dimen/dp_30"
+                app:rStrokeColor="#ffffff"
+                app:rStrokeWidth="@dimen/dp_1"
+                android:textSize="@dimen/sp_20"></com.zhx.myrounded.RoundedTextView>
+        </FrameLayout>
+
         <TextView
-            android:id="@+id/result"
-            android:textSize="@dimen/dp_20"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:gravity="center"
+            android:text="请按动琴弦"
             android:textColor="#ffffff"
-            android:text="0hz"
+            android:textSize="@dimen/dp_20">
+        </TextView>
+
+        <TextView
+            android:id="@+id/go_accurate_model"
+            android:textColor="#4678ff"
+            android:gravity="center"
+            android:textSize="@dimen/sp_15"
+            android:text="不够精准？进入精准模式试试吧!"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/dp_30">
         </TextView>
-        <TextView
-            android:id="@+id/frequent"
-            android:textSize="@dimen/dp_20"
-            android:textColor="#ff0000"
-            android:text="0hz"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_35"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
-    </FrameLayout>
-
-    <TextView
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:text="请按动琴弦\nG:195 B:246 Eright:329\nD:146 A:110 Elfet:82"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/dp_20"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
         <FrameLayout
+            android:paddingTop="@dimen/dp_30"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60">
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t1"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:background="@drawable/button_style1"
-                android:layout_gravity="center|left"
-                android:text="D"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t2"
-                android:background="@drawable/button_style1"
-                android:layout_marginRight="@dimen/dp_30"
-                android:layout_gravity="center|right"
-                android:text="G"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60">
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t1"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="D"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t2"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="G"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_80">
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t3"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="A"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t4"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="B"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginTop="@dimen/dp_160">
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t5"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="E"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+
+                <com.zhx.myrounded.RoundedTextView
+                    android:id="@+id/t6"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/dp_30"
+                    android:background="@drawable/button_style1"
+                    android:gravity="center"
+                    android:text="E"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    app:rRadius="1000dp"
+                    app:rStrokeColor="#ffffff"
+                    app:rStrokeWidth="@dimen/dp_1"></com.zhx.myrounded.RoundedTextView>
+            </FrameLayout>
+
+            <ImageView
+                android:layout_gravity="center|bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_guitar_head"></ImageView>
         </FrameLayout>
+    </LinearLayout>
 
-        <FrameLayout
-            android:layout_marginTop="@dimen/dp_80"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60">
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t3"
-                android:background="@drawable/button_style1"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:layout_gravity="center|left"
-                android:text="A"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t4"
-                android:background="@drawable/button_style1"
-                android:layout_marginRight="@dimen/dp_30"
-                android:layout_gravity="center|right"
-                android:text="B"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
-        </FrameLayout>
+    <include
+        layout="@layout/accurate_model_view">
+    </include>
 
-        <FrameLayout
-            android:layout_marginTop="@dimen/dp_160"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60">
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t5"
-                android:background="@drawable/button_style1"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:layout_gravity="center|left"
-                android:text="E"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
-            <com.zhx.myrounded.RoundedTextView
-                android:id="@+id/t6"
-                android:background="@drawable/button_style1"
-                android:layout_marginRight="@dimen/dp_30"
-                android:layout_gravity="center|right"
-                android:text="E"
-                app:rStrokeWidth="@dimen/dp_1"
-                app:rStrokeColor="#ffffff"
-                app:rRadius="1000dp"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_20"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
-            </com.zhx.myrounded.RoundedTextView>
-        </FrameLayout>
-
-        <ImageView
-            android:src="@mipmap/icon_guitar_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageView>
-
-    </FrameLayout>
-
-
-</LinearLayout>
+</FrameLayout>

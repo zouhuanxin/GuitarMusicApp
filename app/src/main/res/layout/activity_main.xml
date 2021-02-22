@@ -67,11 +67,19 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginBottom="@dimen/dp_20"
             android:gravity="center"
             android:text="请按动琴弦"
             android:textColor="#ffffff"
             android:textSize="@dimen/dp_20">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/dp_10"
+            android:text="给予权限后请重启app生效">
         </TextView>
 
         <TextView

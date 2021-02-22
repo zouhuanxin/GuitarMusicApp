@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 
 public class PermissionUtils {
     public interface PermissionCallBack {
+        void fail();
         void success();
     }
 

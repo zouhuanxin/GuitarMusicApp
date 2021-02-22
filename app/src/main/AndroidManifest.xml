@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GuitarMusicApp">
         <activity android:name=".activity.SettingActivity"></activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.WelComeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

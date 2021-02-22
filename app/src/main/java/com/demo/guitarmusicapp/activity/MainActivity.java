@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainActivity = this;
         mainViewModel = new ViewModelProvider(mainActivity).get(MainViewModel.class);
         NavigationManager.setBottomNavigationColor(this);
+        initView();
         new PermissionUtils().verifyStoragePermissions(this, null);
         initRecord();
         initAudioRecord();
-        initView();
         startMusic();
     }
 

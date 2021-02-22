@@ -87,6 +87,17 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+
+    implementation "com.hanks:htextview-base:0.1.2"        // base library
+
+    implementation "com.hanks:htextview-fade:0.1.2"        // optional
+    implementation "com.hanks:htextview-line:0.1.2"        // optional
+    implementation "com.hanks:htextview-rainbow:0.1.2"     // optional
+    implementation "com.hanks:htextview-typer:0.1.2"       // optional
+
+    implementation "com.hanks:htextview-scale:0.1.2"       // optional
+    implementation "com.hanks:htextview-evaporate:0.1.2"   // optional
+    implementation "com.hanks:htextview-fall:0.1.2"
 }
 
 // 依赖插件脚本

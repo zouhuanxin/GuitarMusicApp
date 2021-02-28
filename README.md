@@ -1,5 +1,8 @@
 # GuitarMusicApp
 吉他调音器
+```
+如果帮助到你，请点个star。
+```
 
 算法和市场差不多效果。一般精确到小数点后俩位。
 
@@ -13,7 +16,9 @@ fft（快速傅立叶转换）
 [点这里浏览傅立叶博客](https://blog.csdn.net/weixin_41078100/article/details/113700075)
 
 ### DemoApp下载地址
-[点这里下载](http://zhx02.run8.top/2021/02/28/94223cc340bfca9880f29dcaa5f1d13b.apk)
+```
+请发邮件私聊我要，我会尽快回复你。
+```
 
 ### 整个app基本完成，直接看效果。
 

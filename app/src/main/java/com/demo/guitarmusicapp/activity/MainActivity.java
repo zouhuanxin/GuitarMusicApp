@@ -21,12 +21,12 @@ import com.demo.guitarmusicapp.R;
 import com.demo.guitarmusicapp.util.NavigationManager;
 import com.demo.guitarmusicapp.util.PermissionUtils;
 import com.demo.guitarmusicapp.view.InstrumentChar;
+import com.demo.guitarmusicapp.view.InstrumentChar2;
 import com.zhx.myrounded.RoundedTextView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     int frequency = 11025;
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static MainActivity mainActivity = null;
     private LinearLayout mainGroup;
 
-    private List<Float> xAxisValues = new ArrayList<>();
-    private List<Float> yAxisValues = new ArrayList<>();
+    private InstrumentChar2 char2;
 
     // 每个device的初始化参数可能不同
     private void initAudioRecord() {
@@ -110,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resultChar.updateView(new BigDecimal(frequency).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue());
                         double value = new BigDecimal(frequency).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
                         result.setText(value + "HZ");
+                        char2.updateView(value);
                         if (checkFrequency(value, new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
                             t6.setBackgroundColor(Color.parseColor("#60ffffff"));
                         } else if (checkFrequency(value, new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue())) {
@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resultChar = (InstrumentChar) findViewById(R.id.result_char);
         result2 = (TextView) findViewById(R.id.result2);
         closeAccurateModel = (TextView) findViewById(R.id.close_accurate_model);
+        char2 = (InstrumentChar2) findViewById(R.id.char2);
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,31 +218,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 value = String.valueOf(new BigDecimal(D).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t2:
                 value = String.valueOf(new BigDecimal(G).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t3:
                 value = String.valueOf(new BigDecimal(A).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, A + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t4:
                 value = String.valueOf(new BigDecimal(B).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t5:
                 value = String.valueOf(new BigDecimal(Eleft).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
             case R.id.t6:
                 value = String.valueOf(new BigDecimal(Eright).setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue());
                 Toast.makeText(MainActivity.this, value + "HZ", Toast.LENGTH_SHORT).show();
                 frequent.setText(value + "HZ");
+                char2.insertValues(Double.parseDouble(value));
                 break;
         }
     }

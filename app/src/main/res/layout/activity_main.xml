@@ -33,8 +33,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200">
 
+            <com.demo.guitarmusicapp.view.InstrumentChar2
+                android:id="@+id/char2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.demo.guitarmusicapp.view.InstrumentChar2>
+
             <com.zhx.myrounded.RoundedTextView
                 android:id="@+id/result"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -50,6 +57,7 @@
 
             <com.zhx.myrounded.RoundedTextView
                 android:id="@+id/frequent"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -60,7 +68,9 @@
                 android:padding="@dimen/dp_30"
                 app:rStrokeColor="#ffffff"
                 app:rStrokeWidth="@dimen/dp_1"
-                android:textSize="@dimen/sp_20"></com.zhx.myrounded.RoundedTextView>
+                android:textSize="@dimen/sp_20">
+            </com.zhx.myrounded.RoundedTextView>
+
         </FrameLayout>
 
         <TextView
@@ -217,7 +227,8 @@
                 android:layout_gravity="center|bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_guitar_head"></ImageView>
+                android:src="@mipmap/icon_guitar_head2">
+            </ImageView>
         </FrameLayout>
     </LinearLayout>
 
